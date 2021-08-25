@@ -76,7 +76,7 @@ class leftMod(loader.Module):
 			left = self.db.get("left", "left", {})
 			chatid = str(message.chat_id)
 			if chatid not in left: return
-			if message.user_left or message.user_remove:
+			if message.user_left or message.user_delete:
 				user = await message.get_user()
 				chat = await message.get_chat()
 				if not left[chatid]["is_reply"]:
