@@ -48,7 +48,7 @@ class AFKMod(loader.Module):
         mes = self._db.get(__name__, "mes", False) if self._db.get(__name__, "mes", False) else ''
         cause = self._db.get(__name__, "afks", False) if self._db.get(__name__, "afks", False) else ''
         await utils.answer(message, self.strings("back", message)+'\nСообщение на +\n'+str(mes)+'\nПричина\n'+str(cause))
-        await utils.answer(message, self.strings("back", message))
+        #await utils.answer(message, self.strings("back", message))
 
     async def watcher(self, message):
         if not self.get_afk():
