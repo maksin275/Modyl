@@ -19,7 +19,7 @@ from .. import loader, utils
 import logging
 import datetime
 import time
-
+import asyncio
 from telethon import types
 
 logger = logging.getLogger(__name__)
@@ -49,6 +49,8 @@ class  red_afkMod(loader.Module):
         self._db.set(__name__, "ratelimit", [])
         await self.allmodules.log("afk", data=utils.get_args_raw(message) or None)
         await utils.answer(message, self.strings("gone", message))
+        await asyncio.sleep(1)
+        await message.delete()
 
     async def unafkcmd(self, message):
         """Remove the  red_afk status"""
@@ -57,6 +59,8 @@ class  red_afkMod(loader.Module):
         self._db.set(__name__, "ratelimit", [])
         await self.allmodules.log("unafk")
         await utils.answer(message, self.strings("back", message))
+        await asyncio.sleep(1)
+        await message.delete()
 
     async def watcher(self, message):
         if not isinstance(message, types.Message):
