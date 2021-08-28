@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 from telethon import types
 from .. import loader, utils
+import ansynsio
 
 logger = logging.getLogger(__name__)
 
@@ -28,8 +29,7 @@ class trMod(loader.Module):
 
     async def trcmd(self, message):
         """.tr [message]"""
-        from time import sleep
-        await sleep(5)
+        await asyncio.sleep(5)
         if utils.get_args_raw(message):
             self._db.set(__name__, "mes", utils.get_args_raw(message))
             self._db.set(__name__, "tr", utils.get_args_raw(message))
