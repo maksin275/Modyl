@@ -28,6 +28,8 @@ class trMod(loader.Module):
 
     async def trcmd(self, message):
         """.tr [message]"""
+        from time import sleep
+        await sleep(5)
         if utils.get_args_raw(message):
             self._db.set(__name__, "mes", utils.get_args_raw(message))
             self._db.set(__name__, "tr", utils.get_args_raw(message))
