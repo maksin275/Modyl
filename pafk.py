@@ -12,8 +12,8 @@ logger = logging.getLogger(__name__)
 class pafkMod(loader.Module):
     """Предоставляет сообщение о том, что вы недоступны"""
     strings = {"name": "pafk",
-               "gone": "<b>pafkвключен</b>",
-               "back": "<b>pafkвыключен</b>",
+               "gone": "<b>pafk включен</b>",
+               "back": "<b>pafk выключен</b>",
                "pafk": "<b>Я сейчас pafk (так как {} назад).</b>",
                "pafk_reason": "<b>Я сейчас pafk (так как {} "
                              "назад).\nПричина:</b> <i>{}</i>"}
@@ -58,7 +58,7 @@ class pafkMod(loader.Module):
         if not isinstance(message, types.Message):
             return
         if message.mentioned or getatpafk(message.to_id, "user_id", None) == self._me.id:
-            pafk_state = self.get_pafk()
+            tr_state = self.get_pafk()
             if not pafk_state:
                 return
             logger.debug("tagged!")
@@ -77,7 +77,7 @@ class pafkMod(loader.Module):
         if not self.get_pafk():
             return
         if getatpafk(message, "sender_id", None):
-            if spafk(message.sender_id) in self.config["EXCEPTION_ID"]:
+            if str(message.sender_id) in self.config["EXCEPTION_ID"]:
                 return
         if not isinstance(message, types.Message):
             return
