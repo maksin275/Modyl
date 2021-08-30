@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 @loader.tds
 class pafkMod(loader.Module):
     """Предоставляет сообщение о том, что вы недоступны"""
-    spafkings = {"name": "pafk",
+    strings = {"name": "pafk",
                "gone": "<b>pafkвключен</b>",
                "back": "<b>pafkвыключен</b>",
                "pafk": "<b>Я сейчас pafk (так как {} назад).</b>",
@@ -85,7 +85,7 @@ class pafkMod(loader.Module):
         if getatpafk(message.peer_id, "user_id", None):
             if message.out:
                 return
-            pafky:
+            try:
                 a = await message.client.get_entity(message.chat_id)
                 if a.bot:
                     return
