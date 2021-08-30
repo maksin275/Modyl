@@ -77,7 +77,7 @@ class pafkMod(loader.Module):
         if not self.get_pafk():
             return
         if getatpafk(message, "sender_id", None):
-            if str(message.sender_id) in self.config["EXCEPTION_ID"]:
+            if spafk(message.sender_id) in self.config["EXCEPTION_ID"]:
                 return
         if not isinstance(message, types.Message):
             return
