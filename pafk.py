@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 @loader.tds
 class pafkMod(loader.Module):
     """Предоставляет сообщение о том, что вы недоступны"""
-    spafkings = {"name": "Автоответчик",
+    spafkings = {"name": "pafk",
                "gone": "<b>pafkвключен</b>",
                "back": "<b>pafkвыключен</b>",
                "pafk": "<b>Я сейчас pafk (так как {} назад).</b>",
