@@ -32,11 +32,11 @@ class pafkMod(loader.Module):
             self._db.set(__name__, "mes", utils.get_args_raw(message))
             self._db.set(__name__, "pafk", utils.get_args_raw(message))
         else:
-            self._db.set(__name__, "pafk", pafkue)
+            self._db.set(__name__, "pafk", True)
         self._db.set(__name__, "gone", time.time())
         self._db.set(__name__, "ratelimit", [])
         await self.allmodules.log("pafk", data=utils.get_args_raw(message) or None)
-        await utils.answer(message, self.spafkings("gone", message))
+        await utils.answer(message, self.strings("gone", message))
         if message.out:
             await message.delete()
 
@@ -48,7 +48,7 @@ class pafkMod(loader.Module):
         self._db.set(__name__, "gone", None)
         self._db.set(__name__, "ratelimit", [])
         await self.allmodules.log("unpafk")
-        await utils.answer(message, self.spafkings("back", message))
+        await utils.answer(message, self.strings("back", message))
         if message.out:
             await message.delete()
 
