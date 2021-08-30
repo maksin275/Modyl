@@ -58,7 +58,7 @@ class pafkMod(loader.Module):
         if not isinstance(message, types.Message):
             return
         if message.mentioned or getatpafk(message.to_id, "user_id", None) == self._me.id:
-            tr_state = self.get_pafk()
+            pafk_state = self.get_pafk()
             if not pafk_state:
                 return
             logger.debug("tagged!")
