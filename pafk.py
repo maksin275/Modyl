@@ -9,13 +9,13 @@ logger = logging.getLogger(__name__)
 
 
 @loader.tds
-class trMod(loader.Module):
+class pafkMod(loader.Module):
     """Предоставляет сообщение о том, что вы недоступны"""
     strings = {"name": "pafk",
-               "gone": "<b>Автоответчик включен</b>",
-               "back": "<b>Автоответчик выключен</b>",
-               "tr": "<b>Я сейчас tr (так как {} назад).</b>",
-               "tr_reason": "<b>Я сейчас tr (так как {} "
+               "gone": "<b>pafk включен</b>",
+               "back": "<b>pafk выключен</b>",
+               "pafk": "<b>Я сейчас pafk (так как {} назад).</b>",
+               "pafk_reason": "<b>Я сейчас pafk (так как {} "
                              "назад).\nПричина:</b> <i>{}</i>"}
 
     def __init__(self):#1256285611
@@ -26,25 +26,25 @@ class trMod(loader.Module):
         self._db = db
         self._me = await client.get_me()
 
-    async def trcmd(self, message):
-        """.tr [message]"""
+    async def pafkcmd(self, message):
+        """.pafk [message]"""
         if utils.get_args_raw(message):
             self._db.set(__name__, "mes", utils.get_args_raw(message))
-            self._db.set(__name__, "tr", utils.get_args_raw(message))
+            self._db.set(__name__, "pafk", utils.get_args_raw(message))
         else:
-            self._db.set(__name__, "tr", True)
+            self._db.set(__name__, "pafk", True)
         self._db.set(__name__, "gone", time.time())
         self._db.set(__name__, "ratelimit", [])
-        await self.allmodules.log("tr", data=utils.get_args_raw(message) or None)
+        await self.allmodules.log("pafk", data=utils.get_args_raw(message) or None)
         await utils.answer(message, self.strings("gone", message))
         if message.out:
             await message.delete()
 
         
 
-    async def untrcmd(self, message):
-        """Remove the tr status"""
-        self._db.set(__name__, "tr", False)
+    async def unpafkcmd(self, message):
+        """Remove the pafk status"""
+        self._db.set(__name__, "pafk", False)
         self._db.set(__name__, "gone", None)
         self._db.set(__name__, "ratelimit", [])
         await self.allmodules.log("untr")
@@ -58,8 +58,8 @@ class trMod(loader.Module):
         if not isinstance(message, types.Message):
             return
         if message.mentioned or getattr(message.to_id, "user_id", None) == self._me.id:
-            tr_state = self.get_tr()
-            if not tr_state:
+            pafk_state = self.get_pafk()
+            if not pafk_state:
                 return
             logger.debug("tagged!")
             ratelimit = self._db.get(__name__, "ratelimit", [])
@@ -98,5 +98,5 @@ class trMod(loader.Module):
             except Exception as e:
                 pass
 
-    def get_tr(self):
-        return self._db.get(__name__, "tr", False)
+    def get_pafk(self):
+        return self._db.get(__name__, "pafk", False)
