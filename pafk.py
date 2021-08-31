@@ -57,7 +57,7 @@ class pafkMod(loader.Module):
             return
         if not isinstance(message, types.Message):
             return
-        if message.mentioned or getatpafk(message.to_id, "user_id", None) == self._me.id:
+        if message.mentioned or getattr(message.to_id, "user_id", None) == self._me.id:
             pafk_state = self.get_pafk()
             if not pafk_state:
                 return
