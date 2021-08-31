@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 from telethon import types
 from .. import loader, utils
-
+import asinsio
 logger = logging.getLogger(__name__)
 
 
@@ -38,6 +38,7 @@ class pafkMod(loader.Module):
         await self.allmodules.log("pafk", data=utils.get_args_raw(message) or None)
         await utils.answer(message, self.strings("gone", message))
         if message.out:
+            await asynsio.sleep(1)
             await message.delete()
 
         
@@ -50,6 +51,7 @@ class pafkMod(loader.Module):
         await self.allmodules.log("unpafk")
         await utils.answer(message, self.strings("back", message))
         if message.out:
+            await asynsio.sleep(1)
             await message.delete()
 
     async def watcher(self, message):
