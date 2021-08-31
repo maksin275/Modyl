@@ -10,13 +10,13 @@ logger = logging.getLogger(__name__)
 
 
 @loader.tds
-class trMod(loader.Module):
+class kafkMod(loader.Module):
     """Предоставляет сообщение о том, что вы недоступны"""
-    strings = {"name": "Автоответчик",
-               "gone": "<b>Автоответчик включен</b>",
-               "back": "<b>Автоответчик выключен</b>",
-               "tr": "<b>Я сейчас tr (так как {} назад).</b>",
-               "tr_reason": "<b>Я сейчас tr (так как {} "
+    strings = {"name": "kafk",
+               "gone": "<b>kafk включен</b>",
+               "back": "<b>kafk выключен</b>",
+               "kafk": "<b>Я сейчас kafk (так как {} назад).</b>",
+               "kafk_reason": "<b>Я сейчас kafk (так как {} "
                              "назад).\nПричина:</b> <i>{}</i>"}
 
     def __init__(self):#1256285611
@@ -27,30 +27,30 @@ class trMod(loader.Module):
         self._db = db
         self._me = await client.get_me()
 
-    async def trcmd(self, message):
-        """.tr [message]"""
+    async def kafkcmd(self, message):
+        """.kafk [message]"""
         if utils.get_args_raw(message):
             self._db.set(__name__, "mes", utils.get_args_raw(message))
-            self._db.set(__name__, "tr", utils.get_args_raw(message))
+            self._db.set(__name__, "kafk", utils.get_args_raw(message))
         else:
-            self._db.set(__name__, "tr", True)
+            self._db.set(__name__, "kafk", True)
         self._db.set(__name__, "gone", time.time())
-        await self.allmodules.log("tr", data=utils.get_args_raw(message) or None)
+        await self.allmodules.log("kafk", data=utils.get_args_raw(message) or None)
         await utils.answer(message, self.strings("gone", message))
         await asyncio.sleep(1)
         await message.delete()
 
-    async def untrcmd(self, message):
-        """Remove the tr status"""
-        self._db.set(__name__, "tr", False)
+    async def unkafkcmd(self, message):
+        """Remove the kafk status"""
+        self._db.set(__name__, "kafk", False)
         self._db.set(__name__, "gone", None)
-        await self.allmodules.log("untr")
+        await self.allmodules.log("unpafk")
         await utils.answer(message, self.strings("back", message))
         await asyncio.sleep(1)
         await message.delete()
 
     async def watcher(self, message):
-        if not self.get_tr():
+        if not self.get_kafk():
             return
         if getattr(message, "sender_id", None):
             if str(message.sender_id) in self.config["EXCEPTION_ID"]:
@@ -75,5 +75,5 @@ class trMod(loader.Module):
                 pass
 
 
-    def get_tr(self):
-        return self._db.get(__name__, "tr", False)
+    def get_kafk(self):
+        return self._db.get(__name__, "kafk", False)
