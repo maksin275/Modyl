@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 from telethon import types
 from .. import loader, utils
-import asynsio
+import asyncio
 
 logger = logging.getLogger(__name__)
 
