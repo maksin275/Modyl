@@ -37,9 +37,8 @@ class pafkMod(loader.Module):
         self._db.set(__name__, "ratelimit", [])
         await self.allmodules.log("pafk", data=utils.get_args_raw(message) or None)
         await utils.answer(message, self.strings("gone", message))
-        if message.out:
-            await asynsio.sleep(1)
-            await message.delete()
+        await asynsio.sleep(1)
+        await message.delete()
 
         
 
@@ -50,9 +49,8 @@ class pafkMod(loader.Module):
         self._db.set(__name__, "ratelimit", [])
         await self.allmodules.log("unpafk")
         await utils.answer(message, self.strings("back", message))
-        if message.out:
-            await asynsio.sleep(1)
-            await message.delete()
+        await asynsio.sleep(1)
+        await message.delete()
 
     async def watcher(self, message):
         if not isinstance(message, types.Message):
