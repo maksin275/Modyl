@@ -1,10 +1,10 @@
  # -*- coding: utf-8 -*-
 import logging
 import time
+import asyncio
 from datetime import datetime
 from telethon import types
 from .. import loader, utils
-import asyncio
 
 logger = logging.getLogger(__name__)
 
