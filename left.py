@@ -8,7 +8,7 @@ from .. import loader, utils
 @loader.tds
 class leftMod(loader.Module):
 	"""Прощание пользователей в чате."""
-	strings = {'name': 'Left'}
+	strings = {'name': 'left'}
 
 	async def client_ready(self, client, db):
 		self.db = db
