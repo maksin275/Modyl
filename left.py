@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Module author: @ftgmodulesbyfl1yd
-import asyncio
+
 from .. import loader, utils
 
 
@@ -35,8 +35,6 @@ class leftMod(loader.Module):
 		left[chatid].setdefault("is_reply", False)
 		self.db.set("left", "left", left)
 		await message.edit("<b>[left Mode]</b> Активирован!")
-                await asyncio.sleep(5)
-                await message.delete()
 	async def setleftcmd(self, message):
 		"""Установить новое прощание новых пользователей в
 		чате.\nИспользуй: .setleft <текст (можно использовать {name}; {
